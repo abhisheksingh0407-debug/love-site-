@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Only You ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  overflow:hidden;
+  background:linear-gradient(135deg,#ffd1dc,#ffe6f0);
+}
+
+.page{
+  position:absolute;
+  width:100%;
+  height:100vh;
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+}
+
+.page.active{ display:flex; }
+
+h1{
+  font-family:'Pacifico',cursive;
+  font-size:42px;
+  color:#ff4d6d;
+  margin-bottom:20px;
+  text-shadow:0 4px 10px rgba(255,77,109,.4);
+}
+
+p{
+  font-size:18px;
+  color:#5a2a3c;
+  max-width:600px;
+  line-height:1.6;
+}
+
+.bold{
+  font-weight:600;
+  font-size:20px;
+}
+
+button{
+  margin-top:30px;
+  padding:14px 35px;
+  border:none;
+  border-radius:40px;
+  background:#ff4d6d;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(255,77,109,.4);
+}
+
+button:hover{ transform:scale(1.05); }
+
+/* Typing */
+.typing::after{
+  content:'|';
+  animation:blink 1s infinite;
+}
+@keyframes blink{
+  0%,50%{opacity:1}
+  51%,100%{opacity:0}
+}
+
+/* Floating hearts */
+.heart{
+  position:fixed;
+  bottom:-50px;
+  font-size:22px;
+  opacity:.25;
+  animation:floatUp 10s linear infinite;
+}
+@keyframes floatUp{
+  0%{transform:translateY(0);opacity:.25;}
+  100%{transform:translateY(-120vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2023/03/14/audio_6e2b9df8c3.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <h1>Hey Dodo ❤️</h1>
+  <p class="typing" id="t1"></p>
+  <button onclick="nextPage(2)">Continue 💖</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+  <h1>Forever ❤️</h1>
+  <p class="typing" id="t2"></p>
+  <button onclick="nextPage(3)">Continue 💕</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+  <h1>Always You 🐼❤️</h1>
+  <p class="typing" id="t3"></p>
+</div>
+
+<script>
+/* TEXT CONTENT */
+const text1 = `Thank you for everything — for your love, care, patience and constant support.
+Even when things were hard, even when I wasn’t perfect, you never gave up on me.
+That means more to me than words can ever express.`;
+
+const text2 = `I truly appreciate every effort you make, every little thing you do for me.
+I know the past few days were not easy, and I realised my mistakes.
+I am really sorry for them — I have learned, and I promise to do better.
+I will always stand by you, support you, and love you deeply.`;
+
+const text3 = `Thank you for choosing me every single day.
+Thank you for holding my hand when I was weak and never letting me fall.
+I promise to always care for you, protect you, and love you with my whole heart.
+
+You don’t worry — I will always be from your side.
+I will always love you and always care for you. ❤️`;
+
+/* Typing Function */
+function typeText(id,text){
+  let i=0;
+  const el=document.getElementById(id);
+  el.innerHTML='';
+  const interval=setInterval(()=>{
+    el.innerHTML+=text.charAt(i);
+    i++;
+    if(i>=text.length) clearInterval(interval);
+  },35);
+}
+
+typeText('t1',text1);
+
+/* Page change */
+function nextPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page'+n).classList.add('active');
+  if(n===2) typeText('t2',text2);
+  if(n===3) typeText('t3',text3);
+}
+
+/* Floating hearts */
+setInterval(()=>{
+  const h=document.createElement('div');
+  h.className='heart';
+  h.innerHTML='💗';
+  h.style.left=Math.random()*100+'vw';
+  h.style.fontSize=16+Math.random()*20+'px';
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),10000);
+},700);
+</script>
+
+</body>
+  </html>
